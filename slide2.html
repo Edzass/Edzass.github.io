@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link href="https://vjs.zencdn.net/7.15.4/video-js.css" rel="stylesheet" />
+        <script src="https://vjs.zencdn.net/7.15.4/video.min.js"></script>
+      </head>
+	<meta charset="UTF-8">
+	<title>Slideshow</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+		}
+
+		.slide {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			display: none;
+			background-size: cover;
+			background-position: center;
+		}
+
+		.slide.active {
+			display: block;
+			animation: fade 1s ease-in-out;
+		}
+
+		@keyframes fade {
+			from { opacity: 0; }
+			to { opacity: 1; }
+		}
+        #video-slide {
+  height: 100vh;
+}
+	</style>
+</head>
+<body>
+	<div class="slide active" id="slide1" style="background-color: #f5e8e8;">
+		<script src="https://cdn.logwork.com/widget/text.js"></script>
+      <a href="https://logwork.com/current-time-in-riga-latvia" class="clock-widget-text" data-timezone="Europe/Riga" data-language="lv">Riga, Latvia</a>
+	</div>
+
+	<div class="slide" id="slide2" style="background-image: url('attēls.jpg'); background-position-x: 1-2;">
+		<h1 style="text-align: center; font-size: 5rem; color: white;">Attēls</h1>
+	</div>
+
+	<div class="slide" id="slide3 video-slide">
+		
+		<video src="video.mp4" style="width: 100%; height: 100%;" controls></video>
+        <video id="my-video" src="video.mp4" onload="setSlideDuration()"></video>
+	</div>
+   
+
+	<div class="slide" id="slide4" style="background-color: #0072C6;">
+		
+        <iframe style="width: 100%;
+        height: 100%;
+        " src="https://rag.lv" frameborder="0"></iframe>
+	</div>
+
+    <div class="slide"  id="slide5" style="background-color: #0072C6;">
+		
+        <script>
+            (function(d, s, id) {
+                if (d.getElementById(id)) {
+                    if (window.__TOMORROW__) {
+                        window.__TOMORROW__.renderWidget();
+                    }
+                    return;
+                }
+                const fjs = d.getElementsByTagName(s)[0];
+                const js = d.createElement(s);
+                js.id = id;
+                js.src = "https://www.tomorrow.io/v1/widget/sdk/sdk.bundle.min.js";
+      
+                fjs.parentNode.insertBefore(js, fjs);
+            })(document, 'script', 'tomorrow-sdk');
+            </script>
+      
+            <div class="tomorrow"
+               data-location-id="066948"
+               data-language="EN"
+               data-unit-system="METRIC"
+               data-skin="light"
+               data-widget-type="upcoming"
+               style="padding-bottom:22px;position:relative;"
+            >
+              <a
+                href="https://www.tomorrow.io/weather-api/"
+                rel="nofollow noopener noreferrer"
+                target="_blank"
+                style="position: absolute; bottom: 0; transform: translateX(-50%); left: 50%;"
+              >
+                
+              </a>
+            </div>
+      
+      </div>
+	</div>
+
+	<script>
+		var currentSlide = 1;
+		var slideCount = 5;
+		showSlide(currentSlide);
+
+		setInterval(function() {
+			currentSlide++;
+			if (currentSlide > slideCount) {
+				currentSlide = 1;
+			}
+			showSlide(currentSlide);
+		}, 5000);
+
+		function showSlide(n) {
+			var i;
+			var slides = document.getElementsByClassName("slide");
+			for (i = 0; i < slides.length; i++) {
+				slides[i].classList.remove("active");
+			}
+			slides[n-1].classList.add("active");
+		}
+        function setSlideDuration() {
+  var video = document.getElementById("video");
+  var slide = document.getElementById("video-slide");
+  var videoDuration = video.duration;
+  slide.style.animationDuration = videoDuration + "s";
+}
+	</script>
+</body>
+</html>

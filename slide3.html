@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Mana Slaidrāde</title>
+    <style>
+      /* Izveidojam stila klasi slaidu elementiem */
+      .slaida-klase {
+        display: none;
+        text-align: center;
+        height: 100%;
+        width: 100%;
+      }
+      
+      /* Iestatam attēlu, laika un video elementu izmēru */
+      img {
+        max-width: 100%;
+        max-height: 100%;
+      }
+      
+      time {
+        font-size: 3em;
+      }
+      
+      video {
+        max-width: 100%;
+        max-height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Izveidojam slaidu elementus -->
+    <div class="slaida-klase aktīvs">
+      <time>12:00:00</time>
+    </div>
+    <div class="slaida-klase">
+      <img src="attels.jpg">
+    </div>
+    <div class="slaida-klase">
+      <video src="video.mp4" autoplay onended="nākamaisSlaid()">
+        Jūsu pārlūkprogramma neatbalsta video.
+      </video>
+    </div>
+    <div class="slaida-klase">
+      <iframe src="https://www.rag.lv" height="100%" width="100%"></iframe>
+    </div>
+
+    <!-- Pievienojam JavaScript kodu, kas izmaina slaidus -->
+    <script>
+      // Izveidojam masīvu ar slaidu elementiem
+      var slaiduMasivs = document.querySelectorAll('.slaida-klase');
+      var aktīvaisSlaidaIndeks = 0;
+      var videoSlaidaLaiks = 0;
+
+      // Izveidojam funkciju, kas pārslēdz slaidus
+      function nākamaisSlaid() {
+        // Noslēpjam pašreizējo slaidu
+        slaiduMasivs[aktīvaisSlaidaIndeks].classList.remove('aktīvs');
+        
+        // Pārejam uz nākamo slaidu, vai atgriežamies pie pirmā, ja pēdējais tika sasniegts
+        aktīvaisSlaidaIndeks++;
+        if (aktīvaisSlaidaIndeks >= slaiduMasivs.length) {
+          aktīvaisSlaidaIndeks = 0;
+        }
+
+        // Parādam nākamo slaidu
+        slaiduMasivs[aktīvaisSlaidaIndeks].classList.add('aktīvs');
+
+        // Ja šis ir video slaida elements, noteiktu tā garumu un uzstādām timeout laiku pirms pārslēgšanās uz nākamo slaidu
+        if (slaiduMasivs[aktīvaisSlaidaIndeks].querySelector('video')) {
+          var videoSlaidaElements = slaiduMasivs[aktīvaisSlaidaIndeks].querySelectorAll('video');
+        </script>
+          </body> 
+</html>

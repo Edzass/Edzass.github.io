@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Slideshow</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			height: 100vh;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background-color: #333;
+		}
+
+		.slide {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			opacity: 0;
+			transition: opacity 1s ease-in-out;
+		}
+
+		.slide.active {
+			opacity: 1;
+		}
+
+		.slide img {
+			max-width: 100%;
+			max-height: 100%;
+		}
+
+		.slide video {
+			max-width: 100%;
+			max-height: 100%;
+		}
+
+		.slide h1, .slide p {
+			color: white;
+			text-align: center;
+		}
+
+		@keyframes slidein {
+			from {
+				transform: translateX(-100%);
+			}
+			to {
+				transform: translateX(0);
+			}
+		}
+
+		@keyframes slideout {
+			from {
+				transform: translateX(0);
+			}
+			to {
+				transform: translateX(100%);
+			}
+		}
+
+		.slide-left {
+			animation: slidein 1s forwards;
+		}
+
+		.slide-right {
+			animation: slideout 1s forwards;
+		}
+
+		#video1 {
+			position: relative;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+        body {
+			margin: 0;
+			padding: 0;
+		}
+		.slide {
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 100vh;
+			width: 100%;
+			opacity: 0;
+			transition: opacity 1s ease-in-out;
+		}
+		.active-slide {
+			opacity: 1;
+			z-index: 1;
+		}
+		.fullscreen {
+			object-fit: cover;
+			width: 100%;
+			height: 100vh;
+		}
+		video {
+			width: 100%;
+			height: 100%;
+			object-fit: fill;
+		}
+	</style>
+</head>
+<body>
+	<div class="slide active-slide" id="slide-1">
+		<h1>Precīzs laiks</h1>
+		<p>Šis slaidā parāda precīzu laiku.</p>
+		<script>
+			function showSlide2() {
+				hideAllSlides();
+				document.getElementById('slide-2').classList.add('active-slide');
+			}
+
+			setTimeout(showSlide2, 5000);
+		</script>
+	</div>
+	<div class="slide" id="slide-2">
+		<h1>Attēls</h1>
+		<img class="fullscreen" src="attels.jpg">
+		<script>
+			function showSlide3() {
+				hideAllSlides();
+				document.getElementById('slide-3').classList.add('active-slide');
+			}
+
+			setTimeout(showSlide3, 5000);
+		</script>
+	</div>
+	<div class="slide" id="slide-3">
+		<h1>Video</h1>
+		<video autoplay muted onended="showSlide4()">
+			<source src="video.mp4" type="video/mp4">
+		</video>
+		<script>
+			function showSlide4() {
+				hideAllSlides();
+				document.getElementById('slide-4').classList.add('active-slide');
+			}
+
+			var video = document.querySelector('video');
+			video.addEventListener('loadedmetadata', function() {
+				setTimeout(function() {
+					video.pause();
+					video.currentTime = 0;
+				}, (video.duration - 1) * 1000);
+			});
+		</script>
+	</div>
+	<div class="slide" id="slide-4">
+		<h1>Rag.lv</h1>
+		<iframe class="fullscreen" src="https://www.rag.lv"></iframe>
+		<script>
+			function hideAllSlides() {
+				var slides = document.getElementsByClassName('slide');
+				for (var i = 0; i < slides.length; i++) {
+					slides[i].classList.remove('active-slide');
+				}
+			}
+
+			function showSlide1() {
+				hideAllSlides();
+				document.getElementById('slide-1').classList.add('active-slide');
+			}
+
+			setTimeout(showSlide1, 5000);
+		</script>
+	</div>
+</body>
+</html>
